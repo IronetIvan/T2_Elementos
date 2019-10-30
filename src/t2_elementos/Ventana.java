@@ -11,9 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import paneles.PestaniaCuatro;
 import paneles.PestaniaDos;
 import paneles.PestaniaTres;
 import paneles.PestaniaUno;
+import paneles.PestaniaCinco;
 
 /**
  *
@@ -26,6 +28,9 @@ public class Ventana extends JFrame {
     PestaniaUno pestaniaUno;
     PestaniaDos pestaniaDos;
     PestaniaTres pestaniaTres;
+    PestaniaCuatro pestaniaCuatro;
+    PestaniaCinco pestaniaCinco;
+    
     JTabbedPane panelPestanias;
 
     public void initGUI(){
@@ -44,6 +49,8 @@ public class Ventana extends JFrame {
         panelPestanias.addTab("Botones",pestaniaUno);
         panelPestanias.addTab("Check y radios",pestaniaDos);
         panelPestanias.addTab("Textos", pestaniaTres);
+        panelPestanias.addTab("TextoRepaso", pestaniaCuatro);
+        panelPestanias.addTab("Form", pestaniaCinco);
     }
 
     private void instancias() {
@@ -52,5 +59,7 @@ public class Ventana extends JFrame {
         pestaniaUno = new PestaniaUno();
         pestaniaDos = new PestaniaDos();
         pestaniaTres = new PestaniaTres();
+        pestaniaCuatro = new PestaniaCuatro();
+        pestaniaCinco = new PestaniaCinco();
     }
 }
