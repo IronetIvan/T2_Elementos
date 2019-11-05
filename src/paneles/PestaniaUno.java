@@ -108,4 +108,6 @@ public class PestaniaUno extends JPanel implements ActionListener, ChangeListene
         }
 
     }
+    
+    //BorderLayout JFrame      FlowLayout --> JPanel
 }
