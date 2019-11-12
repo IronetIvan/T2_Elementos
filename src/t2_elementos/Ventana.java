@@ -7,7 +7,13 @@ package t2_elementos;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.MenuBar;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JProgressBar;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
@@ -32,14 +38,19 @@ public class Ventana extends JFrame {
     PestaniaCuatro pestaniaCuatro;
     PestaniaCinco pestaniaCinco;
     PestaniaSeis pestaniaSeis;
-    
-    JTabbedPane panelPestanias;
 
-    public void initGUI(){
+    JTabbedPane panelPestanias;
+    JMenuBar menu;
+    JMenu menu1;
+    JMenuItem opcion1;
+    JProgressBar barraProgreso;
+
+    public void initGUI() {
 
         instancias();
         configurarContainer();
-        this.setSize(new Dimension(300,300));
+        configMenu();
+        this.setSize(new Dimension(300, 300));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -48,8 +59,8 @@ public class Ventana extends JFrame {
 
     private void configurarContainer() {
         container.add(panelPestanias);
-        panelPestanias.addTab("Botones",pestaniaUno);
-        panelPestanias.addTab("Check y radios",pestaniaDos);
+        panelPestanias.addTab("Botones", pestaniaUno);
+        panelPestanias.addTab("Check y radios", pestaniaDos);
         panelPestanias.addTab("Textos", pestaniaTres);
         panelPestanias.addTab("TextoRepaso", pestaniaCuatro);
         panelPestanias.addTab("Form", pestaniaCinco);
@@ -65,5 +76,23 @@ public class Ventana extends JFrame {
         pestaniaCuatro = new PestaniaCuatro();
         pestaniaCinco = new PestaniaCinco();
         pestaniaSeis = new PestaniaSeis();
+        menu = new JMenuBar();
+        menu1 = new JMenu("Menu 1");
+        barraProgreso = new JProgressBar();
+        opcion1 = new JMenuItem("Opcion1", KeyEvent.VK_CONTROL);
+
+    }
+
+    private void configMenu() {
+        setJMenuBar(menu);
+        menu.add(menu1);
+        menu1.add("opcion1");
+        menu1.add("opcion2");
+        menu1.add("opcion3");
+        menu1.addSeparator();
+        menu1.add("opcion4");
+        menu1.add("opcion5");
+        menu1.add("opcion6");
+        opcion1.setMnemonic(KeyEvent.VK_CONTROL);
     }
 }
