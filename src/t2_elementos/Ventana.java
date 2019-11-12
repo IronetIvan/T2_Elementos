@@ -9,6 +9,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.MenuBar;
 import java.awt.event.KeyEvent;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -23,6 +24,7 @@ import paneles.PestaniaTres;
 import paneles.PestaniaUno;
 import paneles.PestaniaCinco;
 import paneles.PestaniaSeis;
+import paneles.PestaniaSiete;
 
 /**
  *
@@ -38,12 +40,13 @@ public class Ventana extends JFrame {
     PestaniaCuatro pestaniaCuatro;
     PestaniaCinco pestaniaCinco;
     PestaniaSeis pestaniaSeis;
-
+    PestaniaSiete pestaniaSiete;
     JTabbedPane panelPestanias;
+    
     JMenuBar menu;
     JMenu menu1;
     JMenuItem opcion1;
-    JProgressBar barraProgreso;
+   
 
     public void initGUI() {
 
@@ -65,6 +68,7 @@ public class Ventana extends JFrame {
         panelPestanias.addTab("TextoRepaso", pestaniaCuatro);
         panelPestanias.addTab("Form", pestaniaCinco);
         panelPestanias.addTab("", pestaniaSeis);
+        panelPestanias.addTab("Barra Progreso", pestaniaSiete);
     }
 
     private void instancias() {
@@ -76,11 +80,12 @@ public class Ventana extends JFrame {
         pestaniaCuatro = new PestaniaCuatro();
         pestaniaCinco = new PestaniaCinco();
         pestaniaSeis = new PestaniaSeis();
+        pestaniaSiete = new PestaniaSiete();
         menu = new JMenuBar();
         menu1 = new JMenu("Menu 1");
-        barraProgreso = new JProgressBar();
+        
         opcion1 = new JMenuItem("Opcion1", KeyEvent.VK_CONTROL);
-
+      
     }
 
     private void configMenu() {
