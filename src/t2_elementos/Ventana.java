@@ -67,7 +67,7 @@ public class Ventana extends JFrame {
         panelPestanias.addTab("Textos", pestaniaTres);
         panelPestanias.addTab("TextoRepaso", pestaniaCuatro);
         panelPestanias.addTab("Form", pestaniaCinco);
-        panelPestanias.addTab("", pestaniaSeis);
+        panelPestanias.addTab("Agregar elementos", pestaniaSeis);
         panelPestanias.addTab("Barra Progreso", pestaniaSiete);
     }
 
