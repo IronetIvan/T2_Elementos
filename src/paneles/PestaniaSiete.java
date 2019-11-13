@@ -13,12 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author irone
  */
-public class PestaniaSiete extends JPanel implements ActionListener{
+public class PestaniaSiete extends JPanel implements ActionListener, ChangeListener{
 
     JButton pulsar;
     JProgressBar barraProg;
@@ -56,6 +58,7 @@ public class PestaniaSiete extends JPanel implements ActionListener{
 
     private void acciones() {
         pulsar.addActionListener(this);
+        barraProg.addChangeListener(this);
     }
 
     @Override
@@ -65,6 +68,13 @@ public class PestaniaSiete extends JPanel implements ActionListener{
             if (barraProg.getValue()==100){
                 getToolkit().beep();
             }
+        }
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent arg0) {
+        if(barraProg.getValue()==100){
+        System.out.println("Completado");
         }
     }
 }
