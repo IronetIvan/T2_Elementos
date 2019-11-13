@@ -6,6 +6,8 @@
 package paneles;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -16,7 +18,7 @@ import javax.swing.SwingConstants;
  *
  * @author irone
  */
-public class PestaniaSiete extends JPanel {
+public class PestaniaSiete extends JPanel implements ActionListener{
 
     JButton pulsar;
     JProgressBar barraProg;
@@ -39,19 +41,30 @@ public class PestaniaSiete extends JPanel {
 
     private void configPanel() {
 
-        this.setLayout(new BorderLayout());
-        this.add(pulsar, BorderLayout.CENTER);
-        this.add(barraProg, BorderLayout.SOUTH);
+        this.add(pulsar);
+        this.add(barraProg);
     }
 
     private void configBarraProgress() {
-        barraProg.getValue();
+        barraProg.setMinimum(0);
+        barraProg.setMaximum(100);
+        barraProg.setValue(0);
+        //barraProgreso.getValue();
         barraProg.setStringPainted(true);
-        barraProg.setIndeterminate(true);
+        barraProg.setBorderPainted(true);
     }
 
     private void acciones() {
-
+        pulsar.addActionListener(this);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == pulsar) {
+            barraProg.setValue(barraProg.getValue()+25);
+            if (barraProg.getValue()==100){
+                getToolkit().beep();
+            }
+        }
+    }
 }
