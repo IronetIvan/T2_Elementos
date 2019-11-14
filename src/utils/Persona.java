@@ -11,15 +11,24 @@ package utils;
  */
 public class Persona {
 
-    String nombre, apellido;
-    int telefono;
+   String nombre, apellido;
+    int telefono, edad;
     boolean disponibilidad;
 
-    public Persona(String nombre, String apellido, int telefono, boolean disponibilidad) {
+    public Persona(String nombre, String apellido, int telefono, int edad, boolean disponibilidad) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
+        this.edad = edad;
         this.disponibilidad = disponibilidad;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
     public String getNombre() {
@@ -56,6 +65,6 @@ public class Persona {
 
     @Override
     public String toString() {
-        return getNombre();
+        return getApellido();
     }
 }
