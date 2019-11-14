@@ -38,7 +38,6 @@ public class PestaniaCinco extends JPanel implements ActionListener, ChangeListe
     JPanel pSuperior, pCentro;
     JButton bAgregar;
 
-
     public PestaniaCinco() {
         initGUI();
     }
@@ -52,10 +51,16 @@ public class PestaniaCinco extends JPanel implements ActionListener, ChangeListe
     }
 
     private void configurarModeloCombo() {
-        modeloCombo.addElement(new Persona("Nombre 1","a",123,
-                23,false));
-        modeloCombo.addElement(new Persona("Nombre 2","b",123,
-                23,false));
+        modeloCombo.addElement(new Persona("Nombre 1", "a", 123,
+                23, false));
+        modeloCombo.addElement(new Persona("Nombre 2", "b", 123,
+                23, false));
+        modeloCombo.addElement(new Persona("Nombre 3", "c", 123, 12, false));
+        modeloCombo.addElement("DAM");
+        modeloCombo.addElement("DAW");
+        modeloCombo.addElement("TSEAS");
+        modeloCombo.addElement("Mark");
+        modeloCombo.addElement("EDI");
     }
 
     private void acciones() {
@@ -67,69 +72,63 @@ public class PestaniaCinco extends JPanel implements ActionListener, ChangeListe
 
     private void configurarPanel() {
         this.setLayout(new BorderLayout());
-        this.add(configurarSuperior(),BorderLayout.NORTH);
+        this.add(configurarSuperior(), BorderLayout.NORTH);
         this.add(configurarCentro(), BorderLayout.CENTER);
     }
 
     private JPanel configurarCentro() {
         pCentro.setLayout(new GridBagLayout());
         // Fila 0
-        configurarGridBag(0,0,1,1,0,0.2,
-                GridBagConstraints.WEST,GridBagConstraints.NONE,
+        configurarGridBag(0, 0, 1, 1, 0, 0.2,
+                GridBagConstraints.WEST, GridBagConstraints.NONE,
                 new JLabel("Nombre"));
-        configurarGridBag(1,0,1,1,1,0.2,
-                GridBagConstraints.WEST,GridBagConstraints.HORIZONTAL,
+        configurarGridBag(1, 0, 1, 1, 1, 0.2,
+                GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
                 tNombre);
 
         // Fila 1
-
-        configurarGridBag(0,1,1,1,0,0.2,
-                GridBagConstraints.WEST,GridBagConstraints.NONE,
+        configurarGridBag(0, 1, 1, 1, 0, 0.2,
+                GridBagConstraints.WEST, GridBagConstraints.NONE,
                 new JLabel("Apellido"));
-        configurarGridBag(1,1,1,1,1,0.2,
-                GridBagConstraints.WEST,GridBagConstraints.HORIZONTAL,
+        configurarGridBag(1, 1, 1, 1, 1, 0.2,
+                GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
                 tApellido);
 
-
         // Fila 2 Nueva
-
-        configurarGridBag(0,2,1,1,0,0.2,
-                GridBagConstraints.WEST,GridBagConstraints.NONE,
+        configurarGridBag(0, 2, 1, 1, 0, 0.2,
+                GridBagConstraints.WEST, GridBagConstraints.NONE,
                 new JLabel("Edad"));
-        configurarGridBag(1,2,1,1,1,0.2,
-                GridBagConstraints.WEST,GridBagConstraints.HORIZONTAL,
+        configurarGridBag(1, 2, 1, 1, 1, 0.2,
+                GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
                 spinnerEdad);
 
         // Fila 2
-
-        configurarGridBag(0,3,1,1,0,0.2,
-                GridBagConstraints.WEST,GridBagConstraints.NONE,
+        configurarGridBag(0, 3, 1, 1, 0, 0.2,
+                GridBagConstraints.WEST, GridBagConstraints.NONE,
                 new JLabel("Teléfono"));
-        configurarGridBag(1,3,1,1,1,0.2,
-                GridBagConstraints.WEST,GridBagConstraints.HORIZONTAL,
+        configurarGridBag(1, 3, 1, 1, 1, 0.2,
+                GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
                 tNumero);
 
         // Fila 3
-
-        configurarGridBag(0,4,1,1,0,0.2,
-                GridBagConstraints.WEST,GridBagConstraints.NONE,
+        configurarGridBag(0, 4, 1, 1, 0, 0.2,
+                GridBagConstraints.WEST, GridBagConstraints.NONE,
                 new JLabel("Disponibilidad"));
-        configurarGridBag(1,4,1,1,1,0.2,
-                GridBagConstraints.WEST,GridBagConstraints.NONE,
+        configurarGridBag(1, 4, 1, 1, 1, 0.2,
+                GridBagConstraints.WEST, GridBagConstraints.NONE,
                 cDisponible);
 
         // Fila 4
-
-        configurarGridBag(0,5,2,1,0,0.2,
-                GridBagConstraints.CENTER,GridBagConstraints.NONE,
+        configurarGridBag(0, 5, 2, 1, 0, 0.2,
+                GridBagConstraints.CENTER, GridBagConstraints.NONE,
                 bAgregar);
 
         return pCentro;
     }
 
     private void configurarGridBag(int pX, int pY, int tX, int tY,
-                                   double peX, double peY, int anc,
-                                   int fill, JComponent component){
+            double peX, double peY, int anc,
+            int fill, JComponent component) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = pX;
         constraints.gridy = pY;
@@ -139,7 +138,7 @@ public class PestaniaCinco extends JPanel implements ActionListener, ChangeListe
         constraints.weighty = peY;
         constraints.fill = fill;
         constraints.anchor = anc;
-        pCentro.add(component,constraints);
+        pCentro.add(component, constraints);
     }
 
     private JPanel configurarSuperior() {
@@ -149,7 +148,7 @@ public class PestaniaCinco extends JPanel implements ActionListener, ChangeListe
         return pSuperior;
     }
 
-    public void configurarSpinnerList(){
+    public void configurarSpinnerList() {
         datosSpinner.add("Nombre1");
         datosSpinner.add("Nombre2");
         datosSpinner.add("Nombre3");
@@ -158,7 +157,7 @@ public class PestaniaCinco extends JPanel implements ActionListener, ChangeListe
     }
 
     private void instancias() {
-        modeloSpinnerNumeros = new SpinnerNumberModel(18,18,99,1);
+        modeloSpinnerNumeros = new SpinnerNumberModel(18, 18, 99, 1);
         modeloSpinnerLista = new SpinnerListModel();
         spinnerNumeros = new JSpinner(modeloSpinnerNumeros);
         spinnerLista = new JSpinner(modeloSpinnerLista);
@@ -178,8 +177,8 @@ public class PestaniaCinco extends JPanel implements ActionListener, ChangeListe
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == bAgregar){
-            if (tNumero.getText().isEmpty()||tApellido.getText().isEmpty() || tNumero.getText().isEmpty()){
+        if (e.getSource() == bAgregar) {
+            if (tNumero.getText().isEmpty() || tApellido.getText().isEmpty() || tNumero.getText().isEmpty()) {
                 System.out.println("Faltan datos");
                 // posibilidad captura selección combo
                 // Persona p = (Persona) compoNormal.getItemAt(compoNormal.getSelectedIndex());
@@ -195,7 +194,7 @@ public class PestaniaCinco extends JPanel implements ActionListener, ChangeListe
                 int telefono = Integer.valueOf(tNumero.getText());
                 int edad = Integer.valueOf(spinnerEdad.getModel().getValue().toString());
                 boolean disponibilidad = cDisponible.isSelected();
-                Persona persona = new Persona(nombre,apellido,telefono,edad,disponibilidad);
+                Persona persona = new Persona(nombre, apellido, telefono, edad, disponibilidad);
                 datosSpinner.add(persona);
             }
         }
@@ -205,11 +204,10 @@ public class PestaniaCinco extends JPanel implements ActionListener, ChangeListe
     @Override
     public void stateChanged(ChangeEvent e) {
         //System.out.println("Cambiado");
-        if (spinnerLista.getModel().getValue().getClass() == Persona.class){
+        if (spinnerLista.getModel().getValue().getClass() == Persona.class) {
             Persona pSeleccionada = (Persona) spinnerLista.getModel().getValue();
             System.out.println(pSeleccionada.isDisponibilidad());
         }
-
 
     }
 
@@ -222,12 +220,13 @@ public class PestaniaCinco extends JPanel implements ActionListener, ChangeListe
     }
 
     class ManejoTeclas extends KeyAdapter {
+
         @Override
         public void keyTyped(KeyEvent e) {
             char tecla = e.getKeyChar();
-            if (!Character.isDigit(tecla)){
+            if (!Character.isDigit(tecla)) {
                 e.consume();
-            } else if (tNumero.getText().length()>9){
+            } else if (tNumero.getText().length() > 9) {
                 e.consume();
             }
         }
