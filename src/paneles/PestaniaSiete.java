@@ -29,7 +29,6 @@ public class PestaniaSiete extends JPanel implements ActionListener, ChangeListe
     JProgressBar barraProgreso;
     int opcion;
 
-
     public PestaniaSiete() {
 
         initGUI();
@@ -127,9 +126,9 @@ public class PestaniaSiete extends JPanel implements ActionListener, ChangeListe
 
         } else if (e.getSource() == bDialogoOpcionesPerso) {
             String[] opciones = {"Botón1", "Botón2", "Botón3"};
-            Persona[] personas = {new Persona("Nombre1", "Apellido1", 123, false),
-                    new Persona("Nombre2", "Apellido2", 123, false),
-                    new Persona("Nombre3", "Apellido3", 123, false)};
+            Persona[] personas = {new Persona("Nombre1", "Apellido1", 123, 123, false),
+                    new Persona("Nombre2", "Apellido2", 123, 123, false),
+                    new Persona("Nombre3", "Apellido3", 123, 123, false)};
             int opcionPerso = JOptionPane.showOptionDialog(PestaniaSiete.this, "Selecciona una opción",
                     "Título del diálogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                     personas, personas[0]);
@@ -149,9 +148,9 @@ public class PestaniaSiete extends JPanel implements ActionListener, ChangeListe
                     "Mensaje",JOptionPane.INFORMATION_MESSAGE);
             System.out.println(datoIntro);
         } else if (e.getSource() == bDialogoEntradaPersona){
-            Persona[] personas = {new Persona("Nombre1", "Apellido1", 123, false),
-                    new Persona("Nombre2", "Apellido2", 123, false),
-                    new Persona("Nombre3", "Apellido3", 123, false)};
+            Persona[] personas = {new Persona("Nombre1", "Apellido1", 123, 123, false),
+                    new Persona("Nombre2", "Apellido2", 123, 123, false),
+                    new Persona("Nombre3", "Apellido3", 123, 123, false)};
 
             Persona seleccionada = (Persona) JOptionPane.showInputDialog(PestaniaSiete.this,"Selecciona una persona",
                     "Titulo",JOptionPane.INFORMATION_MESSAGE,null,personas,personas[0]);

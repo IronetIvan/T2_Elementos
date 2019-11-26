@@ -29,7 +29,7 @@ import utils.Persona;
  *
  * @author irone
  */
-public class PestaniaSeis extends JPanel implements ActionListener, ChangeListener, ItemListener {
+public class PestaniaSeis extends JPanel implements ActionListener {
 
     JList listaNormal;
     JButton botonAgregar, botonRellenar;
@@ -40,20 +40,10 @@ public class PestaniaSeis extends JPanel implements ActionListener, ChangeListen
         initGUI();
     }
 
-    public void initGUI() {
+    private void initGUI() {
         instancias();
-        acciones();
         configurarPanel();
-    }
-
-    private void instancias() {
-        listaPersonas = new ArrayList<>();
-        listaPersonas.add(new Persona("dd", "fd", 5345, true));
-        modeloLista = new DefaultListModel();
-        listaNormal = new JList(modeloLista);
-        listaNormal.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        botonAgregar = new JButton("agregar elemento");
-        botonRellenar = new JButton("Rellenar");
+        acciones();
     }
 
     private void acciones() {
@@ -70,46 +60,51 @@ public class PestaniaSeis extends JPanel implements ActionListener, ChangeListen
         });
     }
 
+    private void configurarPanel() {
+        this.setLayout(new BorderLayout());
+        this.add(new JScrollPane(listaNormal), BorderLayout.CENTER);
+        this.add(botonAgregar, BorderLayout.NORTH);
+        this.add(botonRellenar, BorderLayout.SOUTH);
+    }
+
+    private void instancias() {
+
+        modeloLista = new DefaultListModel();
+        listaNormal = new JList(modeloLista);
+
+        listaNormal.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        // listaNormal.setModel(modeloLista);
+        botonAgregar = new JButton("Agregar elemento");
+        botonRellenar = new JButton("Rellenar lista");
+        listaPersonas = new ArrayList<>();
+        listaPersonas.add(new Persona("asd", "asd", 12, 12, false));
+        listaPersonas.add(new Persona("asd1", "asd", 12, 12, false));
+        listaPersonas.add(new Persona("asd2", "asd", 12, 12, false));
+        listaPersonas.add(new Persona("asd3", "asd", 12, 12, false));
+        listaPersonas.add(new Persona("asd4", "asd", 12, 12, false));
+        listaPersonas.add(new Persona("asd5", "asd", 12, 12, false));
+
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == botonAgregar) {
+            modeloLista.addElement("Ejemplo de item");
+            //System.out.println(listaNormal.getSelectedIndex());
+            //Persona seleccionada = (Persona) listaNormal.getSelectedValue();
+            //System.out.println(seleccionada.isDisponibilidad());
             Object seleccionado = modeloLista.getElementAt(listaNormal.getSelectedIndex());
             if (seleccionado.getClass() == Persona.class) {
-                Persona seleccionada = (Persona) listaNormal.getSelectedValue();//Devuelve el objeto completo
                 Persona pEncontrada = (Persona) modeloLista.getElementAt(listaNormal.getSelectedIndex());
+                System.out.println(pEncontrada.isDisponibilidad());
             }
-
-        };
-        if (e.getSource() == botonRellenar) {
-            for (Persona p : listaPersonas) {
-                modeloLista.addElement(p);
+        } else if (e.getSource() == botonRellenar) {
+            //modeloLista.addElement(listaPersonas);
+            for (Persona item : listaPersonas) {
+                modeloLista.addElement(item);
             }
         }
-
     }
 
-    @Override
-    public void stateChanged(ChangeEvent e) {
-
-    }
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-
-    }
-
-    private void configurarPanel() {
-        this.setLayout(new BorderLayout());
-        this.add(new JScrollPane(listaNormal), BorderLayout.NORTH);
-        this.add(botonRellenar, BorderLayout.SOUTH);
-        this.add(botonAgregar, BorderLayout.CENTER);
-    }
-
-    class ManejoKey extends KeyAdapter {
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-
-        }
-    }
 }
