@@ -5,17 +5,11 @@
  */
 package paneles;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.*;
 import utils.Persona;
 
 /**
@@ -25,13 +19,26 @@ import utils.Persona;
 public class PestaniaSiete extends JPanel implements ActionListener, ChangeListener{
 
    JButton botonNormal, bDialogoInfo, bDialogoWarn, bDialogoError, bDialogoOpciones, bDialogoOpcionesPerso,
-            bDialogoEntrada, bDialogoEntradaPersona;
+            bDialogoEntrada, bDialogoEntradaPersona, bFicheros, bColor;
+    JLabel texto;
     JProgressBar barraProgreso;
     int opcion;
 
-    public PestaniaSiete() {
+    JPopupMenu contextual;
+    JMenuItem opcionUno, opcionDos;
 
+    PestaniaSiete pestaniaSiete;
+
+
+    public PestaniaSiete() {
         initGUI();
+        configurarPopUp();
+    }
+
+    private void configurarPopUp() {
+        contextual.add(opcionUno);
+        contextual.add(opcionDos);
+        opcionUno.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, KeyEvent.ALT_MASK));
     }
 
     public void initGUI() {
@@ -45,7 +52,6 @@ public class PestaniaSiete extends JPanel implements ActionListener, ChangeListe
         barraProgreso.setMinimum(0);
         barraProgreso.setMaximum(100);
         barraProgreso.setValue(0);
-        //barraProgreso.getValue();
         barraProgreso.setStringPainted(true);
         barraProgreso.setBorderPainted(true);
 
@@ -60,7 +66,11 @@ public class PestaniaSiete extends JPanel implements ActionListener, ChangeListe
         bDialogoOpcionesPerso.addActionListener(this);
         bDialogoEntrada.addActionListener(this);
         bDialogoEntradaPersona.addActionListener(this);
+        bFicheros.addActionListener(this);
+        bColor.addActionListener(this);
         barraProgreso.addChangeListener(this);
+        opcionUno.addActionListener(this);
+        this.addMouseListener(new ManejoRaton());
 
 
     }
@@ -75,6 +85,9 @@ public class PestaniaSiete extends JPanel implements ActionListener, ChangeListe
         this.add(bDialogoOpcionesPerso);
         this.add(bDialogoEntrada);
         this.add(bDialogoEntradaPersona);
+        this.add(bFicheros);
+        this.add(bColor);
+        this.add(texto);
     }
 
     private void instancias() {
@@ -87,6 +100,15 @@ public class PestaniaSiete extends JPanel implements ActionListener, ChangeListe
         bDialogoOpcionesPerso = new JButton("Pregunta perso");
         bDialogoEntrada = new JButton("Entrada");
         bDialogoEntradaPersona = new JButton("Entrada persona");
+        bFicheros = new JButton("Ficheros");
+        bColor = new JButton("Colores");
+        texto = new JLabel("Texto");
+
+        contextual = new JPopupMenu();
+        opcionUno = new JMenuItem("Opción 1");
+        opcionDos = new JMenuItem("Opción 2");
+
+        pestaniaSiete = this;
 
 
     }
@@ -155,6 +177,22 @@ public class PestaniaSiete extends JPanel implements ActionListener, ChangeListe
             Persona seleccionada = (Persona) JOptionPane.showInputDialog(PestaniaSiete.this,"Selecciona una persona",
                     "Titulo",JOptionPane.INFORMATION_MESSAGE,null,personas,personas[0]);
             System.out.println(seleccionada.getNombre());
+        } else if (e.getSource() == bFicheros){
+            JFileChooser fileChooser = new JFileChooser();
+            int i = fileChooser.showSaveDialog(this);
+            if (i == JFileChooser.APPROVE_OPTION){
+                String f = fileChooser.getSelectedFile().getName();
+                String ex = f.substring(f.indexOf(".")+1);
+                System.out.println(ex);
+            }else if (i == JFileChooser.CANCEL_OPTION){
+
+            }
+        } else if (e.getSource() == bColor){
+            //JColorChooser colorChooser = new JColorChooser();
+            Color c = JColorChooser.showDialog(this,"Titulo", Color.BLUE);
+            texto.setForeground(c);
+        } else if (e.getSource() == opcionUno){
+            System.out.println("pulsado opcion 1");
         }
     }
 
@@ -167,4 +205,18 @@ public class PestaniaSiete extends JPanel implements ActionListener, ChangeListe
 
         }
     }
+
+    class ManejoRaton extends MouseAdapter{
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (e.getButton() == MouseEvent.BUTTON3) {
+                contextual.show(pestaniaSiete, e.getX(), e.getY());
+            }
+
+        }
+    }
+
 }
