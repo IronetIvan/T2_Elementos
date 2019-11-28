@@ -33,131 +33,129 @@ import static javax.swing.text.StyleConstants.Italic;
  */
 public class PestaniaPerson extends JPanel implements ItemListener {
 
-    JLabel letras, tamano, tipo, estilo;
-    JComboBox letrasC, tamanoC, tipoC, estiloC;
-    DefaultComboBoxModel modeloLetra, modeloTam, modeloTipo, modeloEstilo;
+    JComboBox comboLetra, comboTamanio, comboTipo, comboEstilo;
+    DefaultComboBoxModel modeloLetra, modeloTamanio, modeloTipo, modeloEstilo;
+    JLabel labelLetra, labelTamanio, labelTipo, labelEstilo;
 
     public PestaniaPerson() {
 
         initGUI();
     }
 
-    public void initGUI(){
+    public void initGUI() {
         instancias();
-        acciones();
-        configPanel();
         rellenarLetras();
+        rellenarTamanio();
         rellenarTipo();
-        rellenarTamano();
         rellenarEstilos();
-        cambiarLetras();
-
+        configurarPanel();
+        acciones();
     }
-    
-    private void rellenarEstilos(){
-        try {
-            UIManager.LookAndFeelInfo[] estilos = UIManager.getInstalledLookAndFeels();
-            
-            for(UIManager.LookAndFeelInfo item : estilos){
-                System.out.println(item.getClassName());
-            }
-            
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            //Logger.getLogger(PestaniaPerson.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            //Logger.getLogger(PestaniaPerson.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            //Logger.getLogger(PestaniaPerson.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            //Logger.getLogger(PestaniaPerson.class.getName()).log(Level.SEVERE, null, ex);
+
+    private void rellenarEstilos() {
+        UIManager.LookAndFeelInfo[] estilos =
+                UIManager.getInstalledLookAndFeels();
+        for (UIManager.LookAndFeelInfo item:estilos) {
+            //System.out.println(item.getClassName());
+            modeloEstilo.addElement(item.getClassName());
         }
-        
+
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
     }
 
     private void rellenarLetras() {
-        Font[] fuente = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+        Font[] fuentes = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getAllFonts();
 
-        for (Font item : fuente) {
+        for (Font item : fuentes) {
+
             modeloLetra.addElement(item.getName());
         }
+
+
     }
 
-    private void rellenarTamano() {
-        for (int i = 8; i < 61; i++) {
-            modeloTam.addElement(i);
+    private void rellenarTamanio() {
+        for (int i = 8; i <= 50; i++) {
+            modeloTamanio.addElement(i);
         }
     }
 
     private void rellenarTipo() {
+
         modeloTipo.addElement("NORMAL");
         modeloTipo.addElement("BOLD");
         modeloTipo.addElement("ITALIC");
-
     }
 
     private void acciones() {
+        comboLetra.addItemListener(this);
+        comboTamanio.addItemListener(this);
+        comboTipo.addItemListener(this);
 
-        letrasC.addItemListener(this);
-        tamanoC.addItemListener(this);
-        tipoC.addItemListener(this);
+    }
+
+    private void configurarPanel() {
+        this.setLayout(new GridLayout(4, 2));
+        this.add(labelLetra);
+        this.add(comboLetra);
+        this.add(labelTamanio);
+        this.add(comboTamanio);
+        this.add(labelTipo);
+        this.add(comboTipo);
+        this.add(labelEstilo);
+        this.add(comboEstilo);
+
     }
 
     private void instancias() {
 
-        letras = new JLabel("Letras");
-        tamano = new JLabel("Tamaño");
-        tipo = new JLabel("Tipo");
-        estilo = new JLabel("Estilo");
-
         modeloLetra = new DefaultComboBoxModel();
-        letrasC = new JComboBox(modeloLetra);
-
-        modeloTam = new DefaultComboBoxModel();
-        tamanoC = new JComboBox(modeloTam);
-
-        modeloTipo = new DefaultComboBoxModel();
-        tipoC = new JComboBox(modeloTipo);
-
         modeloEstilo = new DefaultComboBoxModel();
-        estiloC = new JComboBox(modeloEstilo);
+        modeloTipo = new DefaultComboBoxModel();
+        modeloTamanio = new DefaultComboBoxModel();
 
-    }
+        comboLetra = new JComboBox(modeloLetra);
+        comboTamanio = new JComboBox(modeloTamanio);
+        comboEstilo = new JComboBox(modeloEstilo);
+        comboTipo = new JComboBox(modeloTipo);
 
-    private void configPanel() {
-
-        this.setLayout(new GridLayout(4, 2));
-        this.add(letrasC);
-        this.add(letras);
-        this.add(tamanoC);
-        this.add(tamano);
-        this.add(tipoC);
-        this.add(tipo);
-        this.add(estiloC);
-        this.add(estilo);
+        labelEstilo = new JLabel("Estilo");
+        labelTipo = new JLabel("Tipo");
+        labelTamanio = new JLabel("Tamaño");
+        labelLetra = new JLabel("Letra");
 
     }
 
     private void cambiarLetras() {
-        //Font fuente = new Font((String) modeloLetra.getSelectedItem(), tipoC.getSelectedIndex(), (int) modeloTam.getSelectedItem());
-        //letras.setFont(fuente);
-        Component[] componentes = this.getComponents();
-        for (Component item : componentes) {
-            //item.setFont(fuente);
+        Font fuente = new Font((String) modeloLetra.getSelectedItem(),
+                comboTipo.getSelectedIndex(),
+                (int) modeloTamanio.getSelectedItem());
+        Component[] components = this.getComponents();
+        for (Component item : components) {
+            item.setFont(fuente);
         }
     }
+
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-
-        if (e.getSource() == letrasC) {
+        if (e.getSource() == comboLetra) {
             cambiarLetras();
-        } else if (e.getSource() == tamanoC) {
+        } else if (e.getSource() == comboTamanio) {
             cambiarLetras();
-        } else if (e.getSource() == tipoC) {
+        } else if (e.getSource() == comboTipo) {
             cambiarLetras();
         }
-
     }
-
 }
