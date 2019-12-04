@@ -26,6 +26,7 @@ import paneles.PestaniaCinco;
 import paneles.PestaniaSeis;
 import paneles.PestaniaSiete;
 import paneles.PestaniaPerson;
+import paneles.PestaniaNueve;
 
 /**
  *
@@ -43,6 +44,7 @@ public class Ventana extends JFrame {
     PestaniaSeis pestaniaSeis;
     PestaniaSiete pestaniaSiete;
     PestaniaPerson pestaniaPerson;
+    PestaniaNueve pestaniaNueve;
     JTabbedPane panelPestanias;
     
     JMenuBar menu;
@@ -72,6 +74,8 @@ public class Ventana extends JFrame {
         panelPestanias.addTab("Agregar elementos", pestaniaSeis);
         panelPestanias.addTab("Barra Progreso", pestaniaSiete);
         panelPestanias.addTab("Personalizar", pestaniaPerson);
+        panelPestanias.addTab("Tablas", pestaniaNueve);
+        
     }
 
     private void instancias() {
@@ -85,6 +89,7 @@ public class Ventana extends JFrame {
         pestaniaSeis = new PestaniaSeis();
         pestaniaSiete = new PestaniaSiete();
         pestaniaPerson = new PestaniaPerson();
+        pestaniaNueve = new PestaniaNueve();
         menu = new JMenuBar();
         menu1 = new JMenu("Menu 1");
         
