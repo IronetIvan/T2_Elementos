@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package paneles;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -18,14 +19,14 @@ import java.awt.event.ActionListener;
  *
  * @author Usuario DAM 2
  */
-public class PestaniaNueve extends JPanel implements ActionListener{
-     JTable tabla;
+public class PestaniaDiez extends JPanel implements ActionListener {
+
+    JTable tabla;
     DefaultTableModel modeloSimple;
     JButton bAgregar, bBorrar, bSeleccinado;
     JPanel pSur;
 
-
-    public PestaniaNueve() {
+    public PestaniaDiez() {
 
         initGUI();
     }
@@ -56,8 +57,8 @@ public class PestaniaNueve extends JPanel implements ActionListener{
 
     }
 
-    private JPanel configurarSur(){
-        pSur.setLayout(new GridLayout(3,1));
+    private JPanel configurarSur() {
+        pSur.setLayout(new GridLayout(3, 1));
         pSur.add(bAgregar);
         pSur.add(bBorrar);
         pSur.add(bSeleccinado);
@@ -66,46 +67,26 @@ public class PestaniaNueve extends JPanel implements ActionListener{
 
     private void instancias() {
 
-
-        String datos[][] = {{"Nombre","Apellido","123"},{"Nombre","Apellido","123"},{"Nombre","Apellido","123"},
-                {"Nombre","Apellido","123"}};
-        String columnas[] = {"Nombre","Apellido","Telefono"};
-        modeloSimple = new DefaultTableModel(datos,columnas);
+        String datos[][] = {{"Nombre", "Apellido", "123"}, {"Nombre", "Apellido", "123"}, {"Nombre", "Apellido", "123"},
+        {"Nombre", "Apellido", "123"}};
+        String columnas[] = {"Nombre", "Apellido", "Telefono"};
+        modeloSimple = new DefaultTableModel(datos, columnas);
         tabla = new JTable(modeloSimple);
         bAgregar = new JButton("Agregar");
         bBorrar = new JButton("Borrar");
         pSur = new JPanel();
-        bSeleccinado =  new JButton("Seleccionado");
-
-
+        bSeleccinado = new JButton("Seleccionado");
 
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == bAgregar){
-            String[]datos = {"nuevo","nuevo","nuevo"};
-            modeloSimple.addRow(datos);
-            modeloSimple.fireTableDataChanged();
-        } else if (e.getSource() == bBorrar){
+        if (e.getSource() == bAgregar) {
 
-            int ultima = modeloSimple.getRowCount();
-            modeloSimple.removeRow(ultima);
-            //int selecccionada = tabla.getSelectedRow();
-            //modeloSimple.removeRow(selecccionada);
-            modeloSimple.fireTableDataChanged();
+        } else if (e.getSource() == bBorrar) {
 
-        } else if (e.getSource() == bSeleccinado){
-
-            int filaSeleccionda = tabla.getSelectedRow();
-            int columnaSeleccionada = tabla.getSelectedColumn();
-            System.out.println(modeloSimple.getValueAt(filaSeleccionda,columnaSeleccionada));
-            //tabla.getSelectionModel().
-
-
+        } else if (e.getSource() == bSeleccinado) {
 
         }
     }
 }
-

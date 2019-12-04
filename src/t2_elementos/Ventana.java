@@ -27,6 +27,7 @@ import paneles.PestaniaSeis;
 import paneles.PestaniaSiete;
 import paneles.PestaniaPerson;
 import paneles.PestaniaNueve;
+import paneles.PestaniaDiez;
 
 /**
  *
@@ -45,6 +46,7 @@ public class Ventana extends JFrame {
     PestaniaSiete pestaniaSiete;
     PestaniaPerson pestaniaPerson;
     PestaniaNueve pestaniaNueve;
+    PestaniaDiez pestaniaDiez;
     JTabbedPane panelPestanias;
     
     JMenuBar menu;
@@ -57,7 +59,7 @@ public class Ventana extends JFrame {
         instancias();
         configurarContainer();
         configMenu();
-        this.setSize(new Dimension(300, 300));
+        this.setSize(new Dimension(800, 450));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -74,7 +76,8 @@ public class Ventana extends JFrame {
         panelPestanias.addTab("Agregar elementos", pestaniaSeis);
         panelPestanias.addTab("Barra Progreso", pestaniaSiete);
         panelPestanias.addTab("Personalizar", pestaniaPerson);
-        panelPestanias.addTab("Tablas", pestaniaNueve);
+        panelPestanias.addTab("Tabla simple", pestaniaNueve);
+        panelPestanias.addTab("Tabla avanzada", pestaniaDiez);
         
     }
 
@@ -90,6 +93,8 @@ public class Ventana extends JFrame {
         pestaniaSiete = new PestaniaSiete();
         pestaniaPerson = new PestaniaPerson();
         pestaniaNueve = new PestaniaNueve();
+        pestaniaDiez = new PestaniaDiez();
+        
         menu = new JMenuBar();
         menu1 = new JMenu("Menu 1");
         
