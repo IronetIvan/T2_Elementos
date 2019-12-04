@@ -95,9 +95,10 @@ public class PestaniaNueve extends JPanel implements ActionListener{
             //int selecccionada = tabla.getSelectedRow();
             //modeloSimple.removeRow(selecccionada);
             modeloSimple.fireTableDataChanged();
-
+            
+            
         } else if (e.getSource() == bSeleccinado){
-
+            
             int filaSeleccionda = tabla.getSelectedRow();
             int columnaSeleccionada = tabla.getSelectedColumn();
             System.out.println(modeloSimple.getValueAt(filaSeleccionda,columnaSeleccionada));

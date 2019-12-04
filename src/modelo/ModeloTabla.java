@@ -16,11 +16,11 @@ public class ModeloTabla extends AbstractTableModel {
 
     Persona[][] personas;
     String[] columnas;
-    Class[] tipos = {String.class, Integer.class, Boolean.class, Double.class};
+    Class[] tipos = {String.class, String.class, int.class, Integer.class};
 
     public ModeloTabla(Persona[][] personas, String[] columnas) {
         this.personas = personas;
-        this.columnas = columnas;
+        this.columnas = new String[]{"nombre", "apellido", "telefono", "disponibilidad"};
     }
 
     @Override
