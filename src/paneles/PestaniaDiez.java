@@ -5,15 +5,18 @@
  */
 package paneles;
 
+import modelo.ModeloTabla;
+import utils.Persona;
+
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import modelo.ModeloTabla;
 
 /**
  *
@@ -22,9 +25,11 @@ import java.awt.event.ActionListener;
 public class PestaniaDiez extends JPanel implements ActionListener {
 
     JTable tabla;
-    DefaultTableModel modeloSimple;
-    JButton bAgregar, bBorrar, bSeleccinado;
+    //DefaultTableModel modeloSimple;
+    ModeloTabla modeloTabla;
+    JButton bAgregar, bBorrar, bSeleccinado, bSeleccionMultiple;
     JPanel pSur;
+
 
     public PestaniaDiez() {
 
@@ -41,6 +46,7 @@ public class PestaniaDiez extends JPanel implements ActionListener {
         bAgregar.addActionListener(this);
         bBorrar.addActionListener(this);
         bSeleccinado.addActionListener(this);
+        bSeleccionMultiple.addActionListener(this);
         tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -58,35 +64,54 @@ public class PestaniaDiez extends JPanel implements ActionListener {
     }
 
     private JPanel configurarSur() {
-        pSur.setLayout(new GridLayout(3, 1));
+        pSur.setLayout(new GridLayout(4, 1));
         pSur.add(bAgregar);
         pSur.add(bBorrar);
         pSur.add(bSeleccinado);
+        pSur.add(bSeleccionMultiple);
         return pSur;
     }
 
     private void instancias() {
 
-        String datos[][] = {{"Nombre", "Apellido", "123"}, {"Nombre", "Apellido", "123"}, {"Nombre", "Apellido", "123"},
-        {"Nombre", "Apellido", "123"}};
-        String columnas[] = {"Nombre", "Apellido", "Telefono"};
-        modeloSimple = new DefaultTableModel(datos, columnas);
-        tabla = new JTable(modeloSimple);
+
+        ArrayList personas = new ArrayList();
+        personas.add(new Persona("N1","A1",234123,23,false));
+        personas.add(new Persona("N2","A2",345634,42,true));
+        personas.add(new Persona("N3","A3",6455,15,false));
+         modeloTabla = new ModeloTabla(personas);
+        //modeloSimple = new DefaultTableModel(datos, columnas);
+        tabla = new JTable(modeloTabla);
         bAgregar = new JButton("Agregar");
         bBorrar = new JButton("Borrar");
         pSur = new JPanel();
         bSeleccinado = new JButton("Seleccionado");
-
+        bSeleccionMultiple = new JButton("Selección multiple");
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bAgregar) {
 
+            Persona p = new Persona("NNuevo","ANuevo",123123,32,true);
+            // modeloTabla.getPersonas().add(p);
+            // modeloTabla.fireTableDataChanged();
+            modeloTabla.agregarPersona(p);
+
         } else if (e.getSource() == bBorrar) {
+            modeloTabla.borrarPersona(tabla.getSelectedRow());
 
         } else if (e.getSource() == bSeleccinado) {
 
+            Persona persona = modeloTabla.personaSeleccionada(tabla.getSelectedRow());
+            System.out.println(persona.getEdad());
+
+        } else if (e.getSource() == bSeleccionMultiple) {
+            Persona[] seleccionadas = modeloTabla.personasSeleccionadasMultiple(tabla.getSelectedRows());
+            for (Persona p: seleccionadas) {
+                System.out.println(p.getEdad());
+            }
         }
     }
 }
